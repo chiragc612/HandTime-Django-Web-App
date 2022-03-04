@@ -1,0 +1,62 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>HandTime</title>
+</head>
+
+<body class="sub_page">
+	<!-- product section -->
+	<section class="product_section ">
+		<div class="container">
+			<div class="product_heading">
+				<h2>
+					Top Sale Watches
+				</h2>
+			</div>
+			<div class="product_container">
+				{% for i in products %}
+				<div class="box">
+					<div class="box-content">
+						<div class="img-box">
+							<img src="{{i.file.url}}" alt="">
+						</div>
+						<div class="detail-box">
+							<div class="text">
+								<h6>
+									{{i.productname}}
+								</h6>
+								<h5>
+									<span>Rs.</span> {{i.price}}
+								</h5>
+							</div>
+							<div class="like">
+								<h6>
+									Like
+								</h6>
+								<div class="star_container">
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+								</div>
+							</div>
+						</div>
+						<div class="btn">
+							<a href="{% url 'editproducts' pk=i.pk %}"><input type="button" value="EDIT" class="btn btn-primary"></a>
+							<a href="{% url 'deleteproducts' pk=i.pk %}"><input type="button" value="DELETE" class="btn btn-danger"></a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>
+{% endblock %}

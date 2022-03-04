@@ -1,0 +1,64 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Details</title>
+</head>
+
+<body class="sub_page">
+	{% if message %}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>{{message}}</strong>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	{% endif %}
+	<!-- contact section -->
+	<section class="contact_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2 class="text-center">
+					{{product.productname}} Details
+				</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<img src="{{product.file.url}}" class="card-img-top" alt="...">
+					</div>
+					</a>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<h3 class="card-title">{{product.productname}}</h3>
+							<h4>₹ {{product.price}}</h4>
+							<p><b>{{product.description}}</b></p>
+							<h5>Available offers :-</h5>
+							<h6>-Special PriceGet extra 10% off (price inclusive of discount) <a href="#"
+									style="color: blue;">T&C</a> <br>
+								-Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit Card <a href="#"
+									style="color: blue;">T&C</a>
+								<br>
+								-Partner OfferSign up for Flipkart Pay Later and get Flipkart Gift Card worth ₹100* <a
+									href="#" style="color: blue;">Know More</a>
+							</h6>
+							<a href="{% url 'addToWishlists' pk=product.pk %}"><input type="button" value="WISHLIST" class="btn btn-secondary"></a>
+							<a href="{% url 'addToCarts' pk=product.pk %}"><input type="button" value="CART" class="btn btn-secondary"></a>
+							<a href="#"><input type="button" value="BUY" class="btn btn-dark"></a>
+						</div>
+					</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end contact section -->
+</body>
+
+</html>
+{% endblock %}

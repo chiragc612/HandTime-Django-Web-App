@@ -1,0 +1,68 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Add Products</title>
+</head>
+
+<body class="sub_page">
+	{% if message %}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>{{message}}</strong>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	{% endif %}
+	<!-- contact section -->
+	<section class="contact_section layout_padding">
+		<div class="container">
+			<div class="heading_container">
+				<h2 class="text-center">
+					Add Products
+				</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-6 ">
+					<div class="form_container">
+						<form method="post" action="{% url 'addproducts' %}" enctype="multipart/form-data">
+							{% csrf_token %}
+							<div>
+								<input placeholder="Product Name" type="text" name="productname">
+							</div>
+							<div>
+								<input placeholder="Price" type="text" name="price">
+							</div>
+							<div>
+								<textarea class="form-control mb-2" placeholder="Description" type="text"
+									name="description"></textarea>
+							</div>
+							<div>
+								<input class="form-control" type="file" name="file">
+							</div>
+							<div class="btn_box">
+								<button type="submit">
+									ADD
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="map_container">
+						<div class="map">
+							<img class="card-img" src="{% static 'images/slider-bg.jpg' %}" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end contact section -->
+</body>
+
+</html>
+{% endblock %}

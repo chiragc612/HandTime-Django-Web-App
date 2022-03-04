@@ -1,0 +1,64 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>HandTime</title>
+</head>
+
+<body class="sub_page">
+	<!-- product section -->
+	<section class="product_section ">
+		<div class="container">
+			<div class="product_heading">
+				<h2>
+					Total : {{netPrice}} | Items : {{request.session.carts_count}}
+				</h2>
+				<form name="pay" method="post" action="{% url 'pay' %}">
+					{% csrf_token %}
+					<input type="hidden" name="amount" value="{{netPrice}}">
+					<input type="submit" name="action" value="Buy" class="m-1 btn btn-dark btn-block btn-lg"
+						data-mdb-ripple-color="dark">
+				</form>
+			</div>
+			<div class="row row-cols-1 row-cols-md-3 g-4">
+				{% if carts %}
+				{% for i in carts %}
+				<div class="col">
+					<div class="card">
+						<img src="{{i.product.file.url}}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h3 class="card-title">{{i.product.productname}}</h3>
+							<h5>₹ {{i.price}}</h5>
+							<p>{{i.product.description}}</p>
+							<form name="changeQty" action="{% url 'changeQty' %}" method="post">
+								{% csrf_token %}
+								<input type="hidden" name="cid" value="{{i.id}}">
+								<h6 class="text-muted">Quantity</h6>
+								<input id="form1" min="1" name="productQty" value="{{i.qty}}" type="number"
+									class="form-control form-control-sm" onchange="this.form.submit()" />
+							</form>
+							<div>
+								<h6 class="text-muted">Total</h6>
+								<h6>₹ {{i.totalprice}}</h6>
+							</div>
+							<a href="{% url 'removeFromCart' pk=i.product.pk %}"><input type="button" value="REMOVE"
+									class="btn btn-dark btn-block btn-lg mt-2"></a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% else %}
+				<div class="col d-flex justify-content-center align-items-center">
+					<h3>No Products in Carts.</h3>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>
+{% endblock %}
